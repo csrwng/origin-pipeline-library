@@ -16,12 +16,12 @@ def tagExists(Object ctx, String imageStreamName, String tag) {
     }
     for (i = 0; i < tags.size(); i++) {
         if (tags[i].tag == tag) {
-        if (tags[i].items.size() > 0) {
-            return true
-        }
+            if (tags[i].items.size() > 0) {
+                return true
+            }
         }
     }
-    return true
+    return false
 }
 
 
@@ -30,5 +30,5 @@ def call(Object ctx, String imageStreamName, String tag) {
   ctx.openshift.withCluster() {
     exists = tagExists(ctx, imageStreamName, tag)
   }
-  return false
+  return exists
 }
